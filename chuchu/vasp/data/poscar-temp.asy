@@ -21,7 +21,7 @@ currentlight       = AtomLight;
 
 $camera
 
-Basis basis = Basis();
+Basis basis = Basis(
     $basis
 ); //This basis has been already scaled up
 
@@ -37,3 +37,7 @@ $draw_atoms
 
 $draw_bonds
 
+
+
+//vim-run: asy -batchView %
+//vim-run: asy -f pdf %
