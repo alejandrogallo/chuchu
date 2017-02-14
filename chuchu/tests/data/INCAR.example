@@ -1,0 +1,22 @@
+NELECT=510
+ENCUT = 400
+LHFCALC=.TRUE.
+HFSCREEN = 1.778 ; AEXX = 0.173; LMODELHF = .TRUE.              !asdfasdfqiwer qwer
+ALGO=FCIDUMP2
+!ENCUTGW=300
+!SIGMA = 0.0001
+LMAXFOCKAE=4 !asdfasd fasdf asdf as !this does not work yet
+!ENCUTGW=300
+!SIGMA = 0.0001
+ENCUTGW=300
+SIGMA = 0.0001
+EDIFF = 1E-8
+PREC=A
+NBANDS=257
+NUNFROZEN=4
+IUNFROZEN=254 255 256 257
+
+!Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+!tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
+!vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
+!no sea takimata sanctus est Lorem ipsum dolor sit amet.
