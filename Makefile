@@ -3,7 +3,9 @@ CLEAN_FILES  ?=
 
 
 CLEAN_FILES += \
-$(shell find . -name *.pyc)
+$(shell find . -name *.pyc) \
+$(wildcard test_* ) \
+
 
 
 dev-install-local:
