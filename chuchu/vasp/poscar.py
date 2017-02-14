@@ -12,7 +12,6 @@ class Poscar(object):
     asy_template_path = os.path.dirname(__file__)+"/data/poscar-temp.asy"
     vasp_template_path = os.path.dirname(__file__)+"/data/poscar-temp.vasp"
     def __init__(self):
-        self.fd = None
         self.mode = False
         self.basis = []
         self.atoms = []
@@ -60,7 +59,6 @@ class Poscar(object):
             f = obj
         elif type(obj) is str:
             f = open(obj, "r")
-        self.fd = f
         for j,line in enumerate(f):
             line_number=j+1
             if re.match(r"^\s*$",line):
