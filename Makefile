@@ -1,9 +1,14 @@
 
+PYTHON = python
+VENV_DIR ?= .env
 CLEAN_FILES  ?=
+REQUIREMENTS = requirements.txt
 
 
 CLEAN_FILES += \
-$(shell find . -name *.pyc)
+$(shell find . -name *.pyc) \
+$(shell find . -name *.pyo) \
+$(shell find . -name __pycache__) \
 
 
 dev-install-local:
