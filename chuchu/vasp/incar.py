@@ -46,7 +46,7 @@ class Incar(object):
         elif type(obj) is str:
             f = open(obj, "r")
         self.logger.debug("Cleaning up comments")
-        contents = re.sub(r"!.*\n", r"", f.read())
+        contents = re.sub(r"!.*\n", r"\n", f.read())
         contents = "\n".join(contents.split(";")).split("\n")
         is_variable = lambda line: re.match(r"\s*(\w+)\s*=(.*)[!]?$", line)
         for line in contents:
