@@ -11,8 +11,8 @@ logger = logging.getLogger("vasp:poscar")
 class Poscar(object):
     asy_template_path = os.path.dirname(__file__)+"/data/poscar-temp.asy"
     vasp_template_path = os.path.dirname(__file__)+"/data/poscar-temp.vasp"
+    blender_template_path = os.path.dirname(__file__)+"/data/poscar-temp.blender.py"
     def __init__(self):
-        self.fd = None
         self.mode = False
         self.basis = []
         self.atoms = []
@@ -60,7 +60,6 @@ class Poscar(object):
             f = obj
         elif type(obj) is str:
             f = open(obj, "r")
-        self.fd = f
         for j,line in enumerate(f):
             line_number=j+1
             if re.match(r"^\s*$",line):
@@ -104,10 +103,13 @@ class Poscar(object):
     def getNumberOfAtoms(self):
         return int(sum(self.atoms_number_header))
     def dump(self, fmt = "vasp", fd = None):
+        self.logger.debug("Dumping poscar in %s format"%fmt)
         if fmt == "asy":
             content = self.dumpAsyAtoms()
         elif fmt == "vasp":
             content = self.dumpVasp()
+        elif fmt == "blender":
+            content = self.dumpBlender()
         else:
             self.logger.error("Format '%s' not recognised"%fmt)
             sys.exit(1)
@@ -117,12 +119,17 @@ class Poscar(object):
         else:
             self.logger.debug("Writing output in %s"%fd)
             fd.write(content)
+    def dumpBlender(self):
+        """TODO: Docstring for dumpBlender.
+        :returns: TODO
+
+        """
+        pass
     def dumpVasp(self):
         """TODO: Docstring for dumpPoscar.
         :returns: TODO
 
         """
-        self.logger.debug("Dumping poscar in poscar format")
         templateString = open(self.vasp_template_path).read()
         template = string.Template(templateString)
         contents = template.substitute(

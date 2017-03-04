@@ -9,6 +9,8 @@ CLEAN_FILES += \
 $(shell find . -name *.pyc) \
 $(shell find . -name *.pyo) \
 $(shell find . -name __pycache__) \
+$(wildcard test_* ) \
+
 
 
 dev-install-local:
