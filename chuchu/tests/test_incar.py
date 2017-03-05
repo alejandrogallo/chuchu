@@ -1,11 +1,10 @@
 import os
-import sys
 import unittest
 import logging
 
 import chuchu.vasp
 
-logging.basicConfig(level = logging.DEBUG)
+logging.basicConfig(level=logging.DEBUG)
 
 
 class TestIncar(unittest.TestCase):
@@ -20,6 +19,7 @@ class TestIncar(unittest.TestCase):
 
     def test_name(self):
         self.assertTrue(True)
+
     def test_simple_poscar(self):
         incar = chuchu.vasp.Incar()
         self.assertTrue(incar)
@@ -32,7 +32,6 @@ class TestIncar(unittest.TestCase):
         fd = open("test_data.incar", "w+")
         incar.dump(fd=fd, fmt="vasp")
         self.assertTrue(os.path.exists("test_data.incar"))
-
 
 
 # vim: cc=80

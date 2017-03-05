@@ -34,6 +34,7 @@ class AtomInfo:
                 int("0x"+hexstr[6:8], 16)/255.0
                 )
 
+
 ATOMS_INFO = [
   AtomInfo("H", 0.53, "0xffffff", 1),
   AtomInfo("He", 0.31, "0xffc0cb", 2),
@@ -130,6 +131,7 @@ ATOMS_INFO = [
   AtomInfo("Am", 1.75, "0xff1493", 95)
 ]
 
+
 def get_atom_info(symbol):
     global ATOMS_INFO
     for atom in ATOMS_INFO:
@@ -170,26 +172,27 @@ def add_atom(
 
 
 def add_bond(atom1, atom2, scale_radius=1):
-    #TODO
+    # TODO
     radius = max(atom1["size"], atom2["size"])*0.3
-    dist_vec = [list(atom1.location)[i] - list(atom2.location)[i]\
-            for i in range(3)]
+    dist_vec = [list(atom1.location)[i] - list(atom2.location)[i]
+                for i in range(3)]
     dist = math.sqrt(sum([a**2 for a in dist_vec]))
     bpy.ops.mesh.primitive_cylinder_add(
             location=[
-                dist_vec[i]/2 + list(atom2.location)[i] \
-                        for i in range(3)
+                dist_vec[i]/2 + list(atom2.location)[i]
+                for i in range(3)
                 ],
             radius=radius,
-            depth = dist
+            depth=dist
             )
     phi = math.atan2(dist_vec[1], dist_vec[0])
     theta = math.acos(dist_vec[2]/dist)
     bpy.context.object.rotation_euler[1] = phi
     bpy.context.object.rotation_euler[2] = theta
 
+
 clean_scene()
-red = makeMaterial("Red",(1,0,0),(1,1,1),1)
+red = makeMaterial("Red", (1, 0, 0), (1, 1, 1), 1)
 
 scale_radius = .3
 # ATOM DEFINITION
@@ -199,10 +202,7 @@ C3 = add_atom("C", (0.0, 0.5, 0.5), scale_radius=scale_radius)
 C4 = add_atom("C", (0.75, 0.75, 0.25), scale_radius=scale_radius)
 C5 = add_atom("C", (0.75, 0.25, 0.75), scale_radius=scale_radius)
 C6 = add_atom("C", (0.25, 0.75, 0.75), scale_radius=scale_radius)
-N1= add_atom("N", (0.0, 0.0, 0.0), scale_radius=scale_radius)
-
-
-
+N1 = add_atom("N", (0.0, 0.0, 0.0), scale_radius=scale_radius)
 
 
 # vim-run: blender --python %

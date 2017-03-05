@@ -1,11 +1,10 @@
 import os
-import sys
 import unittest
 import logging
 
 import chuchu.vasp
 
-logging.basicConfig(level = logging.DEBUG)
+logging.basicConfig(level=logging.DEBUG)
 
 
 class TestPoscar(unittest.TestCase):
@@ -20,13 +19,14 @@ class TestPoscar(unittest.TestCase):
 
     def test_name(self):
         self.assertTrue(True)
+
     def test_simple_poscar(self):
         poscar = chuchu.vasp.Poscar()
         self.assertTrue(poscar)
         file_name = os.path.dirname(__file__)+"/data/poscar_diamond_8_cubic"
         self.assertTrue(os.path.exists(file_name))
         poscar.load(file_name)
-        for i in range(1,7):
+        for i in range(1, 7):
             self.assertTrue(poscar.getAtomSymbol(i) == "C")
         self.assertTrue(poscar.getAtomSymbol(7) == "N")
         self.assertTrue(len(poscar.getAtomSymbols()) == 2)
@@ -43,7 +43,6 @@ class TestPoscar(unittest.TestCase):
         self.assertTrue(os.path.exists("test_data.vasp"))
         contents = poscar.dump()
         self.assertTrue(contents)
-
 
 
 # vim: cc=80

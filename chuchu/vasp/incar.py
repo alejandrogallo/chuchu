@@ -46,20 +46,22 @@ class Incar(object):
         :returns: TODO
 
         """
-        if type(obj) is file:
+        if hasattr(obj, "read"):
             f = obj
         elif type(obj) is str:
             f = open(obj, "r")
         self.logger.debug("Cleaning up comments")
         contents = re.sub(r"!.*\n", r"\n", f.read())
         contents = "\n".join(contents.split(";")).split("\n")
-        is_variable = lambda line: re.match(r"\s*(\w+)\s*=(.*)[!]?$", line)
+
+        def is_variable(line): return re.match(r"\s*(\w+)\s*=(.*)[!]?$", line)
+
         for line in contents:
             m = is_variable(line)
             if m:
                 key = m.group(1)
                 val = m.group(2)
-                self.logger.debug("Got %s = %s"%(key, val))
+                self.logger.debug("Got {} = {}".format(key, val))
                 self.set(key, val)
 
     def dump(self, fmt="vasp", fd=None):
@@ -75,7 +77,7 @@ class Incar(object):
             self.logger.debug("Returning output string")
             return content
         else:
-            self.logger.debug("Writing output in %s"%fd)
+            self.logger.debug("Writing output in {}".format(fd))
             fd.write(content)
 
     def dumpVasp(self):
@@ -85,6 +87,5 @@ class Incar(object):
         """
         content = []
         for key in self.keys():
-            content += ["%s = %s"%(key, self.get(key))]
+            content += ["{} = {}".format(key, self.get(key))]
         return "\n".join(content)
-
