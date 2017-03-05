@@ -1,6 +1,7 @@
 import re
 import logging
 
+
 class Incar(object):
 
     """Incar class representation of a vasp incar file"""
@@ -8,6 +9,7 @@ class Incar(object):
     def __init__(self):
         self.logger = logging.getLogger("vasp:incar")
         self.props = dict()
+
     def get(self, key):
         """Get vale for a key in the incar settings
 
@@ -15,10 +17,11 @@ class Incar(object):
         :returns: Value
 
         """
-        if not key in self.props.keys():
+        if key not in self.props.keys():
             return False
         else:
             return self.props[key]
+
     def set(self, key, value):
         """Set value for a given key
 
@@ -28,12 +31,14 @@ class Incar(object):
 
         """
         self.props[key] = value
+
     def keys(self):
         """TODO: Docstring for getKeys.
         :returns: TODO
 
         """
         return self.props.keys()
+
     def load(self, obj):
         """Load an incar file
 
@@ -54,8 +59,9 @@ class Incar(object):
             if m:
                 key = m.group(1)
                 val = m.group(2)
-                self.logger.debug("Got %s = %s"%(key,val))
-                self.set(key,val)
+                self.logger.debug("Got %s = %s"%(key, val))
+                self.set(key, val)
+
     def dump(self, fmt="vasp", fd=None):
         """TODO: Docstring for dump.
 
@@ -71,6 +77,7 @@ class Incar(object):
         else:
             self.logger.debug("Writing output in %s"%fd)
             fd.write(content)
+
     def dumpVasp(self):
         """TODO: Docstring for dumpVasp.
         :returns: TODO
